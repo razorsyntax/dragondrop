@@ -1,0 +1,92 @@
+* {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+}
+html {
+	height: 100%;
+	
+	background: #444444; /* Old browsers */
+    background:    -moz-linear-gradient(top,  #0f0f0f 0%,#444444 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0f0f0f), color-stop(100%,#444444)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #0f0f0f 0%,#444444 100%); /* Chrome10+,Safari5.1+ */
+    background:      -o-linear-gradient(top,  #0f0f0f 0%,#444444 100%); /* Opera 11.10+ */
+    background:     -ms-linear-gradient(top,  #0f0f0f 0%,#444444 100%); /* IE10+ */
+    background:         linear-gradient(to bottom, #0f0f0f 0%,#444444 100%); /* W3C */
+
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0f0f0f', endColorstr='#444444',GradientType=0 ); /* IE6-9 */
+}
+
+body {
+	margin-top: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+	min-width: 800px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+#DragBox {
+    width: 140px;
+    height: 140px;	
+    cursor: pointer;
+}
+
+.mainStage {
+    background-color: rgb(52, 4, 4);
+	border-radius: 75px;
+	border: 5px solid black;
+}
+
+@font-face {
+    font-family: samurai;
+    src: url(../fonts/samurai.ttf);
+}
+#title {
+	height:50px;
+	width: 100%;
+	background-color: black;
+	border-bottom: 5px solid rgb(52, 4, 4);
+	padding-left: 0px;
+	padding-top: 10px;
+	margin-left:0px;
+	font-family: samurai;
+	font-size:30px;
+	color: rgb(173, 154, 95);
+	text-shadow: 2px 2px rgb(52, 4, 4);
+}
+
+#difficulty {
+	background-color: rgb(52, 4, 4);
+	border-radius: 15px;
+	border: 5px solid black;
+	color: rgb(173, 154, 95);
+}
+
+#addStage:hover {
+	color: white;
+	cursor: pointer;
+}
+#removeStage:hover {
+	color: white;
+	cursor: pointer;
+}
+
+.play {
+	background-color: rgb(173, 154, 95);
+	color: rgb(52, 4, 4);
+	width: 148px;
+	height: 179px;
+	border: 5px solid black;
+	border-radius: 15px;
+	font-family: samurai;
+	font-size: 42px;
+	display: none;
+}
+
+.reload:hover {
+	cursor: pointer;
+	color: white;
+}

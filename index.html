@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<script src="js/jquery-1.11.2.js"></script>
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		
+		<script src="js/jquery.coords.js"></script>
+		<script src="js/jquery.draggable.js"></script>
+		<script src="js/jquery.collision.js"></script>
+		<script src="js/jquery.gridster.js"></script>
+		<script src="js/jquery.gridster.extras.js"></script>
+		<script src="js/utils.js"></script>
+		
+		<link href="stylesheets/jquery.gridster.css" rel="stylesheet">
+		<link href="stylesheets/font-awesome.css" rel="stylesheet">
+		<link href="stylesheets/jquery-ui.css" rel="stylesheet">
+		<link href="stylesheets/jquery-ui.structure.css" rel="stylesheet">
+		<link href="stylesheets/jquery-ui.theme.css" rel="stylesheet">
+		
+		<link href="stylesheets/dragonsheet.css" rel="stylesheet">
+
+		<title>Dragon Drop</title>
+		
+	</head>
+<body>
+
+	<div id="title"><span style="margin-left: 40%;">Dragon Drop</span></div>
+	<br />
+
+	<br />
+	<center>
+	    <div>
+	        <div style="margin-top:3%">
+	        	<div id="DragBox">
+	        		<div><img src="images/coin.png" width=140px height=140px></div>
+	        	</div>
+	    		<br />
+	    		<div id="difficulty" style="width:38px; height:38px;" title="Click to increase or decrease difficulty">
+	    			<div id="addStage"><i class="fa fa-lg fa-angle-up"></i></div>
+	    			<div id="removeStage"><i class="fa fa-lg fa-angle-down"></i></div>
+	    		</div>
+	    		<i class="fa fa-question-circle" title="Get a single color dragon on all spaces to win!"></i>
+	    		<br />
+	    		<br />
+	    		<div class="play" id="win">You win <i class="fa fa-repeat reload" title="Play Again?"></i></div>
+	    		<div class="play" id="lose">You lose <i class="fa fa-repeat reload" title="Play Again?"></i></div>
+	    		<br />
+	    		<br />
+        
+            	<div class="gridster">
+                    <ul id="grid" style="height: 480px; max-width:770px; margin-left:auto; margin-right:auto;">
+                        <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="mainStage" id="ms1" ></li>
+                        <li data-row="1" data-col="2" data-sizex="1" data-sizey="1" class="mainStage" id="ms2" ></li>
+                        <li data-row="1" data-col="3" data-sizex="1" data-sizey="1" class="mainStage" id="ms3" ></li>
+                    </ul>
+                </div>
+	    		
+	    		
+        
+	        </div>
+	    </div>
+	</center>
+
+<script>
+			
+		var gridster;
+
+		$(function(){
+			$( "#DragBox" ).draggable({ revert: "invalid",  helper: "clone", opacity: 0.5, stack: ".gridster" });
+			
+			var StageNum = $("#grid").children().length;
+			
+			
+			var gridsterProp = {
+				widget_margins: [10, 10],
+				widget_base_dimensions: [140, 140],
+				min_cols: 6,
+				resize: {
+					enabled: true,
+					max_size: [2,2]
+				}
+			};
+			
+			gridster = $(".gridster > ul").gridster(gridsterProp).data('gridster');
+			
+			var CheckArray = [];
+			
+			function RunMe() {
+				$( ".mainStage" ).droppable({
+			
+					tolerance: 'intersect',
+					hoverClass: 'drop-hover',
+					drop: function(event, ui) {
+					
+							if($(this).data("Game") != null)
+								return false;
+					
+							var dropped = this;
+							var drop_p = $(this).offset();
+							var drag_p = ui.draggable.offset();
+							var left_end = drop_p.left - drag_p.left + 1;
+							var top_end = drop_p.top - drag_p.top + 1;
+							ui.draggable.animate({
+								top: '+=' + top_end,
+								left: '+=' + left_end
+							});
+						
+							var DragonHeads = [
+								"images/blue.png",
+								"images/purple.png",
+								"images/gold.png",
+								"images/red.png"
+							];
+			
+							var NumArray = DragonHeads.length;
+							var Num = Math.floor(NumArray*Math.random());
+							$('<div><img src="'+DragonHeads[Num]+'" width=140px height=140px class="iExist"></div>').appendTo(dropped);
+							$(dropped).data("Game", Num);
+						
+							CheckArray.push($(dropped).data("Game"));
+							
+							var NewNum = $("#grid").children().length;;
+							
+							if ( CheckArray.length === NewNum) {
+								function BoolCheck() {
+									for(var i = 1; i < CheckArray.length; i++)
+									{
+										if(CheckArray[i] !== CheckArray[0])
+											return false;
+									}
+									return true;
+								}
+							
+								if ( BoolCheck() ) {
+									$("#win").slideUp( 500 ).delay( 400 ).fadeIn( 250 );
+									$( document ).ready($(".reload").click( function() { location.reload(); }));
+								}
+								else {
+									$("#lose").slideUp( 500 ).delay( 400 ).fadeIn( 250 );
+									$( document ).ready($(".reload").click( function() { location.reload(); }));
+								}
+							}
+					}
+				});
+			}
+			RunMe();
+			
+			$("#addStage").click( function() {
+				var StageCheck = $("#grid").children().length;
+				if (StageCheck < 5 && StageCheck >= 3) {
+					$(".gridster ul").gridster(gridsterProp)
+									 .data('gridster')
+									 .add_widget('<li class="mainStage ui-droppable" id="ms' + (StageCheck + 1) + '"></li>', 1, 1, (StageCheck+1), 1);
+					RunMe();
+				}
+			});
+			
+			$("#removeStage").click( function() {
+				var StageCheck = $("#grid").children().length;
+
+				if (StageCheck <= 5 && StageCheck > 3) {
+					gridster.remove_widget( $('.gridster li').eq(StageCheck-1) );
+				}
+			});
+        });
+
+</script>
+
+</body>
+</html>
