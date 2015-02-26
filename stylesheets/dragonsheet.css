@@ -35,6 +35,13 @@ body {
 	box-shadow: 0px 4px 12px #151515 !important;
 }
 
+.preview-holder {
+	background-image: url(../images/yinyang.png);
+	background-size: 140px;
+    background-color: rgb(23, 23, 23);
+	border-radius: 75px;
+}
+
 ul {
     list-style-type: none;
 }
