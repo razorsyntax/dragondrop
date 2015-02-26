@@ -24,10 +24,7 @@ body {
     margin-right: 0;
     margin-left: 0;
 
-    background-image: url(../images/dragonsymbol.png);
-    background-repeat: no-repeat;
-    background-position-x: 50%;
-    background-position-y: 25%;
+    background: url(../images/dragonsymbol.png) 50% 25% no-repeat;
     background-size: 600px 600px;
 }
 
