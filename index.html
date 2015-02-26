@@ -123,7 +123,7 @@
 			
 							var NumArray = DragonHeads.length;
 							var Num = Math.floor(NumArray*Math.random());
-							$('<div><img src="'+DragonHeads[Num]+'" width=140px height=140px class="iExist"></div>').appendTo(dropped);
+							$('<div class="DragonFace"><img src="'+DragonHeads[Num]+'" width=140px height=140px class="iExist"></div>').appendTo(dropped);
 							$(dropped).data("Game", Num);
 						
 							CheckArray.push($(dropped).data("Game"));
@@ -134,19 +134,34 @@
 								function BoolCheck() {
 									for(var i = 1; i < CheckArray.length; i++)
 									{
-										if(CheckArray[i] !== CheckArray[0])
-											return false;
+										if(CheckArray[i] !== CheckArray[0]) {
+											console.log(CheckArray[i]);
+											return false;}
 									}
 									return true;
 								}
 							
 								if ( BoolCheck() ) {
 									$("#win").slideUp( 500 ).delay( 400 ).fadeIn( 250 );
-									$( document ).ready($(".reload").click( function() { location.reload(); }));
+									$( document ).ready($(".reload").click( 
+																		function() { 
+																			CheckArray.length = 0;
+																			$("#win").hide(); 
+																			$(".DragonFace").remove();
+																			$("#grid").children().removeData();
+																		} 
+																	));
 								}
 								else {
 									$("#lose").slideUp( 500 ).delay( 400 ).fadeIn( 250 );
-									$( document ).ready($(".reload").click( function() { location.reload(); }));
+									$( document ).ready($(".reload").click( 
+																		function() { 
+																			CheckArray.length = 0;
+																			$("#lose").hide(); 
+																			$(".DragonFace").remove();
+																			$("#grid").children().removeData("Game");
+																		} 
+																	));
 								}
 							}
 					}
