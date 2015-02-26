@@ -37,7 +37,6 @@ body {
 }
 
 .preview-holder {
-<<<<<<< HEAD
     border-radius: 75px;
     background-color: rgb(23, 23, 23);
     background-image: url(../images/yinyang.png);
@@ -46,15 +45,6 @@ body {
 
 ul
 {
-=======
-	background-image: url(../images/yinyang.png);
-	background-size: 140px;
-    background-color: rgb(23, 23, 23);
-	border-radius: 75px;
-}
-
-ul {
->>>>>>> origin/master
     list-style-type: none;
 }
 
@@ -129,13 +119,8 @@ ul {
 }
 
 .reload:hover {
-<<<<<<< HEAD
+
     cursor: pointer;
 
     color: white;
 }
-=======
-	cursor: pointer;
-	color: white;
-}
->>>>>>> origin/master

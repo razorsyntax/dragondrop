@@ -67,34 +67,8 @@
 
 <script>
 			
-		var gridster;
-
-		$(function(){
-			$( "#DragBox" ).draggable({ revert: "invalid",  helper: "clone", opacity: 0.5, stack: ".gridster" });
-			
-			var StageNum = $("#grid").children().length;
-			
-			var gridsterProp = {
-				widget_margins: [10, 10],
-				widget_base_dimensions: [140, 140],
-				min_cols: 6,
-				resize: {
-					enabled: true,
-					max_size: [2,2]
-				}
-			};
-			
-			gridster = $(".gridster > ul").gridster(gridsterProp).data('gridster');
-			
-			var CheckArray = [];
-			
-			function RunMe() {
-				$( ".mainStage" ).droppable({
-			
-					tolerance: 'intersect',
-					hoverClass: 'drop-hover',
-					drop: function(event, ui) {
 	var gridster;
+	
 	$(function(){
 		$( "#DragBox" ).draggable({ revert: "invalid",  helper: "clone", opacity: 0.5, stack: ".gridster" });
 		
@@ -133,7 +107,6 @@
 							top: '+=' + top_end,
 							left: '+=' + left_end
 						});
->>>>>>> origin/master
 					
 						var DragonHeads = [
 							"images/blue.png",
