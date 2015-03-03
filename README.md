@@ -1,4 +1,4 @@
-# dragondrop2
+# dragondrop
 
 Just a basic game made with html/css and several JavaScript libraries. Not for commercial use.
 
